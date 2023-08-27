@@ -1,0 +1,24 @@
+.ticketsList {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  width: 502px;
+  max-height: 83vh;
+  border-radius: 5px;
+  list-style: none;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &__no-tickets {
+    font: {
+      weight: 400;
+      size: 16px;
+    }
+    text: {
+      align: center;
+    }
+  }
+}
