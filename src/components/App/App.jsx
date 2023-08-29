@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import classes from './App.module.scss';
@@ -29,9 +31,15 @@ function App({ fetchError, loading }) {
   );
 }
 
+App.propTypes = {
+  fetchError: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   fetchError: state.fetchError,
   loading: state.loading,
 });
 
 export default connect(mapStateToProps)(App);
+

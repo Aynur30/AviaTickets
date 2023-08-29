@@ -1,9 +1,12 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import classes from './TabsPanel.module.scss';
 import Tab from '../Tab/Tab';
 import { tabsNames, toggleTab } from '../../store/actions';
+
 const { cheaper, faster } = tabsNames;
 
 function TabsPanel({ currentTab, showCheaper, showFaster }) {
@@ -29,15 +32,23 @@ function TabsPanel({ currentTab, showCheaper, showFaster }) {
   );
 }
 
+TabsPanel.propTypes = {
+  currentTab: PropTypes.string.isRequired,
+  showCheaper: PropTypes.func.isRequired,
+  showFaster: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   currentTab: state.currentTab,
 });
+
 const mapDispatchToProps = (dispatch) => {
-  const togglehHandler = bindActionCreators(toggleTab, dispatch);
+  const toggleHandler = bindActionCreators(toggleTab, dispatch);
   return {
-    showCheaper: () => togglehHandler(cheaper),
-    showFaster: () => togglehHandler(faster),
+    showCheaper: () => toggleHandler(cheaper),
+    showFaster: () => toggleHandler(faster),
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TabsPanel);
+

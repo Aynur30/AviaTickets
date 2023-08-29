@@ -1,33 +1,11 @@
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import classes from './TicketsList.module.scss';
 import Ticket from '../Ticket/Ticket';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
-
-const applyFilters = (ticket, filters) => {
-  const { all, zero, one, two, three } = filters;
-  const stops = ticket.props.children.props.segments[0].stops.length;
-  return (
-    all ||
-    (zero && stops === 0) ||
-    (one && stops === 1) ||
-    (two && stops === 2) ||
-    (three && stops === 3)
-  );
-};
-
-const applySort = (ticketPrev, ticketCurr, currentTab) => {
-  const prev = ticketPrev.props.children.props;
-  const curr = ticketCurr.props.children.props;
-  switch (currentTab) {
-    case 'faster':
-      return prev.segments[0].duration - curr.segments[0].duration;
-    case 'cheaper':
-      return prev.price - curr.price;
-    default:
-      return 0;
-  }
-};
+import applyFilters from '../Utils/applyFilters';
+import applySort from '../Utils/applySort';
 
 const NoTicketsMessage = (
   <div className={classes['ticketsList__no-tickets']}>
@@ -52,7 +30,7 @@ function TicketsList({ tickets, showedCount, filters, currentTab, loading }) {
     showedCount > ticketsList.length ? null : <ShowMoreButton />;
 
   const noTicketsMessageDisplay =
-    ticketsList.length === 0 && !loading ? NoTicketsMessage : null;
+    ticketsList.length === 0 &&  !loading ? NoTicketsMessage : null;
 
   return (
     <ul className={classes.ticketsList}>
@@ -62,6 +40,28 @@ function TicketsList({ tickets, showedCount, filters, currentTab, loading }) {
     </ul>
   );
 }
+
+TicketsList.propTypes = {
+  tickets: PropTypes.arrayOf(
+    PropTypes.shape({
+      carrier: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      segments: PropTypes.arrayOf(
+        PropTypes.shape({
+          origin: PropTypes.string.isRequired,
+          destination: PropTypes.string.isRequired,
+          date: PropTypes.string.isRequired,
+          stops: PropTypes.arrayOf(PropTypes.string).isRequired,
+          duration: PropTypes.number.isRequired,
+        })
+      ).isRequired,
+    })
+  ).isRequired,
+  showedCount: PropTypes.number.isRequired,
+  filters: PropTypes.object.isRequired, // You should replace this with the actual shape of the filters object
+  currentTab: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   tickets: state.tickets,

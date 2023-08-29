@@ -1,4 +1,5 @@
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import classes from './Filters.module.scss';
@@ -67,6 +68,21 @@ function Filters({
   );
 }
 
+
+
+Filters.propTypes = {
+  all: PropTypes.bool.isRequired,
+  zero: PropTypes.bool.isRequired,
+  one: PropTypes.bool.isRequired,
+  two: PropTypes.bool.isRequired,
+  three: PropTypes.bool.isRequired,
+  switchAll: PropTypes.func.isRequired,
+  switchZero: PropTypes.func.isRequired,
+  switchOne: PropTypes.func.isRequired,
+  switchTwo: PropTypes.func.isRequired,
+  switchThree: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   all: state.filters.all,
   zero: state.filters.zero,
@@ -86,3 +102,15 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filters);
+
+
+
+
+
+
+
+
+
+
+
+

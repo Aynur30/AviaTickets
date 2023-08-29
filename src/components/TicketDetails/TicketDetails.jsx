@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { add, format, getMinutes, getHours, parseISO } from 'date-fns';
 
 import classes from './TicketDetails.module.scss';
@@ -25,31 +27,34 @@ function TicketDetails({ origin, destination, date, stops, duration }) {
   const formatDuration = `${Math.floor(duration / 60)}ч ${duration % 60}м`;
 
   return (
-    <>
-      <section className={classes.ticketDetails}>
-        <div className={classes.ticketDetails__header}>
-          <div className={classes.ticketDetails__row}>
-            <div className={classes.ticketDetails__data}>
-              {origin} - {destination}
-            </div>
-            <div className={classes.ticketDetails__data}>В пути</div>
-            <div className={classes.ticketDetails__data}>
-              {formatStopsCount()}
-            </div>
+    <section className={classes.ticketDetails}>
+      <div className={classes.ticketDetails__header}>
+        <div className={classes.ticketDetails__row}>
+          <div className={classes.ticketDetails__data}>
+            {origin} - {destination}
           </div>
+          <div className={classes.ticketDetails__data}>В пути</div>
+          <div className={classes.ticketDetails__data}>{formatStopsCount()}</div>
         </div>
-        <div className={classes.ticketDetails__body}>
-          <div className={classes.ticketDetails__row}>
-            <div className={classes.ticketDetails__data}>{formatDate()}</div>
-            <div className={classes.ticketDetails__data}>{formatDuration}</div>
-            <div className={classes.ticketDetails__data}>
-              {stops.join(', ')}
-            </div>
-          </div>
+      </div>
+      <div className={classes.ticketDetails__body}>
+        <div className={classes.ticketDetails__row}>
+          <div className={classes.ticketDetails__data}>{formatDate()}</div>
+          <div className={classes.ticketDetails__data}>{formatDuration}</div>
+          <div className={classes.ticketDetails__data}>{stops.join(', ')}</div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
+TicketDetails.propTypes = {
+  origin: PropTypes.string.isRequired,
+  destination: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  stops: PropTypes.arrayOf(PropTypes.string).isRequired,
+  duration: PropTypes.number.isRequired,
+};
+
 export default TicketDetails;
+
