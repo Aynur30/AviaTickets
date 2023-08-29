@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import classes from './Filters.module.scss';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { filtersNames, switchFilter } from '../../store/actions';
-const { all, zero, one, two, thre } = filtersNames;
+const { all, zero, one, two, three } = filtersNames;
 
 function Filters({
   all,
   zero,
   one,
   two,
-  thre,
+  three,
   switchAll,
   switchZero,
   switchOne,
   switchTwo,
-  switchThre,
+  switchThree,
 }) {
   return (
     <div className={classes.filters}>
@@ -57,9 +57,9 @@ function Filters({
         <li>
           <FilterCheckbox
             text="3 пересадки"
-            id="thre"
-            checked={thre}
-            onChange={switchThre}
+            id="three"
+            checked={three}
+            onChange={switchThree}
           />
         </li>
       </ul>
@@ -72,7 +72,7 @@ const mapStateToProps = (state) => ({
   zero: state.filters.zero,
   one: state.filters.one,
   two: state.filters.two,
-  thre: state.filters.thre,
+  three: state.filters.three,
 });
 const mapDispatchToProps = (dispatch) => {
   const switchHandler = bindActionCreators(switchFilter, dispatch);
@@ -81,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
     switchZero: () => switchHandler(zero),
     switchOne: () => switchHandler(one),
     switchTwo: () => switchHandler(two),
-    switchThre: () => switchHandler(thre),
+    switchThree: () => switchHandler(three),
   };
 };
 

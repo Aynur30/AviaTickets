@@ -5,14 +5,14 @@ import Ticket from '../Ticket/Ticket';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 
 const applyFilters = (ticket, filters) => {
-  const { all, zero, one, two, thre } = filters;
+  const { all, zero, one, two, three } = filters;
   const stops = ticket.props.children.props.segments[0].stops.length;
   return (
     all ||
     (zero && stops === 0) ||
     (one && stops === 1) ||
     (two && stops === 2) ||
-    (thre && stops === 3)
+    (three && stops === 3)
   );
 };
 

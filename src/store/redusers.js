@@ -21,7 +21,7 @@ const filtersInitial = {
   zero: true,
   one: true,
   two: true,
-  thre: true,
+  three: true,
 };
 
 const filtersSwitchCheck = (state) =>
