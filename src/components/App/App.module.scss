@@ -1,7 +1,14 @@
+
 .loyaut {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding-bottom: 50px;
   font-family: 'Open Sans';
+}
+
+@media (max-width: 600px){
+  .loyaut{
+    flex-direction: column;
+  }
 }

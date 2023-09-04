@@ -4,9 +4,11 @@
   list-style-type: none;
   margin: 0 0 20px 1px;
   padding: 0;
-  width: 502px;
+  width: 100%;
   & li {
     flex-basis: calc(100%/3);
     flex-grow: 1;
   }
 }
+
+
