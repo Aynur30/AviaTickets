@@ -9,6 +9,8 @@
 
 @media (max-width: 600px){
   .loyaut{
+    display: flex;
+    justify-content: center;
     flex-direction: column;
   }
 }
